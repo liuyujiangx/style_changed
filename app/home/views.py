@@ -6,7 +6,6 @@ from app.models import Z_user, Imgs
 from . import home
 from flask import request
 from flask_restful import Resource, fields, marshal_with
-
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -51,7 +50,7 @@ class Upload_images(Resource):
             if file_path not in url_list:
                 imgs = Imgs(
                     img_url=file_path,
-                    img_name = img.filename
+                    img_name = img.filename[0:-4]
                 )
                 db.session.add(imgs)
                 db.session.commit()
@@ -107,7 +106,8 @@ class StyleMigration(Resource):
             url_list.append(data_url)
             name_list.append(data_name)
         image_file = url_list[num1]  # 原图地址
-        name = str(num1) + '-' + name_list[num1]
+        name = str(num1)+'-' + model_list[num2] + '-' + name_list[num1]
+
         image_name = name  # 风格图名字ed
         imaged_file = 'C:\\Users\\19145\\Desktop\\文件\\图片/style/'  # 图片保存地址
         cmd = 'python C:/Users/19145/Desktop/学习/实训/风格迁移/fast-neural-style-tensorflow-master\\eval.py --model_file ' + model_file + ' --image_file ' + image_file + ' --image_name ' + image_name + ' --imaged_file ' + imaged_file
