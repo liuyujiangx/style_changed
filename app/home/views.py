@@ -80,9 +80,13 @@ class ProfileView(Resource):
 api.add_resource(ProfileView, '/select/<int:id>', endpoint='test')
 
 
+
+
+
+
 class StyleMigration(Resource):
-    def get(self):
-        get_data = request.get_data()
+    def doed(self,get_data):
+
         print(get_data)
         # 将bytes类型转换为json数据
         get_data = json.loads(get_data)
@@ -111,8 +115,19 @@ class StyleMigration(Resource):
         image_name = name  # 风格图名字ed
         imaged_file = 'C:\\Users\\19145\\Desktop\\文件\\图片/style/'  # 图片保存地址
         cmd = 'python C:/Users/19145/Desktop/学习/实训/风格迁移/fast-neural-style-tensorflow-master\\eval.py --model_file ' + model_file + ' --image_file ' + image_file + ' --image_name ' + image_name + ' --imaged_file ' + imaged_file
+        #os.system(cmd)
+
+        return cmd
+
+    def doing(self,cmd):
         os.system(cmd)
-        return 'success'
+    def get(self):
+        get_data = request.get_data()
+        cmd=StyleMigration.doed(self,get_data)
+        StyleMigration.doing(self,cmd)
+        return 'successful'
 
 #x(0:6)
 api.add_resource(StyleMigration, '/change/', endpoint='test3')
+
+
