@@ -14,6 +14,16 @@ class Imgs(db.Model):
     img_url = db.Column(db.String(255))
     img_name = db.Column(db.String(255))
 
+class Imgds(db.Model):
+    __tablename__ = "imgds"
+    id = db.Column(db.Integer,primary_key=True)
+    imgd_url = db.Column(db.String(255))
+    imgd_name = db.Column(db.String(255))
+    imgd_title = db.Column(db.String(255))
+    imgd_content = db.Column(db.String(255))
+    scenic = db.Column(db.String(255))
+    url= db.Column(db.String(255))
+
 if __name__ == '__main__':
     z_user = Z_user(
         id='5',
